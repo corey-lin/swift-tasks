@@ -7,9 +7,10 @@
 //
 
 import UIKit
+import CoreData
 
 class ViewController: UITableViewController {
-  var memos = [String]()
+  var memos = [NSManagedObject]()
 
   // MARK: - Life Cycle
 
@@ -23,6 +24,7 @@ class ViewController: UITableViewController {
     self.navigationItem.rightBarButtonItem =
       UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: Selector("addItem"))
     self.tableView.dataSource = self
+    self.loadSavedMemos()
   }
 
   override func didReceiveMemoryWarning() {
@@ -31,23 +33,38 @@ class ViewController: UITableViewController {
   }
 
   // MARK: - UITableViewDataSource
+
   override func tableView(tableView: UITableView, numberOfRowsInSection: Int) -> Int {
     return memos.count
   }
+
   override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCellWithIdentifier("memoCell")! as UITableViewCell
-    cell.textLabel?.text = self.memos[indexPath.row]
+    cell.textLabel?.text = self.memos[indexPath.row].valueForKey("title") as? String
     return cell
   }
 
   // MARK: -
+
+  private func loadSavedMemos() {
+    let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+    let managedContext = appDelegate.managedObjectContext
+    let fetchRequest = NSFetchRequest(entityName: "MemoEntity")
+    do {
+      let result = try managedContext.executeFetchRequest(fetchRequest)
+      self.memos = result as! [NSManagedObject]
+    } catch {
+      print("Error: loadSavedMemos")
+    }
+  }
+
   @objc private func addItem() {
     let enterPanel = UIAlertController(title: "Memo", message: nil, preferredStyle: .Alert)
     let saveAction = UIAlertAction(title: "Save", style: UIAlertActionStyle.Default, handler: {
       (alertAction: UIAlertAction)
       in
       if let newMemo = enterPanel.textFields?[0].text {
-        self.memos.append(newMemo)
+        self.saveItem(newMemo)
         self.tableView.reloadData()
       }
     })
@@ -61,6 +78,21 @@ class ViewController: UITableViewController {
       textField.placeholder = "Type something"
     })
     self.presentViewController(enterPanel, animated: true, completion:nil)
+  }
+
+  private func saveItem(memo: String) {
+    let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+    let managedContext = appDelegate.managedObjectContext
+    let memoEntity = NSEntityDescription.entityForName("MemoEntity", inManagedObjectContext: managedContext)
+    let memoManagedObject = NSManagedObject(entity: memoEntity!, insertIntoManagedObjectContext: managedContext)
+
+    memoManagedObject.setValue(memo, forKey: "title")
+    do {
+      try managedContext.save()
+      self.memos.append(memoManagedObject)
+    } catch {
+      print("Error: unable to save a new memo")
+    }
   }
 }
 
