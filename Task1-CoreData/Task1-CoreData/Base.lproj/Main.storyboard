@@ -5,7 +5,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Memo-->
         <scene sceneID="HSk-qa-fCl">
             <objects>
                 <tableViewController id="goY-XW-C99" customClass="ViewController" customModule="Task1_CoreData" customModuleProvider="target" sceneMemberID="viewController">
@@ -28,7 +28,7 @@
                             <outlet property="delegate" destination="goY-XW-C99" id="zQv-yr-xQH"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="kAD-KT-nyx"/>
+                    <navigationItem key="navigationItem" title="Memo" id="kAD-KT-nyx"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yJ7-o9-uiR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

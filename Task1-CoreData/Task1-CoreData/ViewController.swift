@@ -24,12 +24,49 @@ class ViewController: UITableViewController {
     self.navigationItem.rightBarButtonItem =
       UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: Selector("addItem"))
     self.tableView.dataSource = self
+    self.tableView.delegate = self
     self.loadSavedMemos()
   }
 
   override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()
     // Dispose of any resources that can be recreated.
+  }
+
+  // MARK: - UITableViewDelegate
+
+  override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
+
+    let deleteAction = UITableViewRowAction(style: .Default, title: "Delete", handler: {
+      _, indexPathForAction in
+      let confirmBox = UIAlertController(title: "Delete this memo?",
+                                       message: self.memos[indexPathForAction.row].valueForKey("title") as? String,
+                                preferredStyle: .Alert)
+      let confirmDelete = UIAlertAction(title: "Yes", style: .Default, handler: {
+        _ in
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let managedContext = appDelegate.managedObjectContext
+
+        managedContext.deleteObject(self.memos[indexPathForAction.row])
+        do {
+          try managedContext.save()
+          self.memos.removeAtIndex(indexPathForAction.row)
+          self.tableView.reloadData()
+        } catch {
+          print("Error: delete a memo")
+        }
+        self.dismissViewControllerAnimated(true, completion: nil)
+      })
+      let cancelDelete = UIAlertAction(title: "No", style: .Default, handler: {
+        _ in
+        tableView.setEditing(false, animated: false)
+        self.dismissViewControllerAnimated(true, completion: nil)
+      })
+      confirmBox.addAction(confirmDelete)
+      confirmBox.addAction(cancelDelete)
+      self.presentViewController(confirmBox, animated: true, completion: nil)
+    })
+    return [deleteAction]
   }
 
   // MARK: - UITableViewDataSource
