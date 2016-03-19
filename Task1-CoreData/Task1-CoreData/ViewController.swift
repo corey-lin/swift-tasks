@@ -36,7 +36,6 @@ class ViewController: UITableViewController {
   // MARK: - UITableViewDelegate
 
   override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
-
     let deleteAction = UITableViewRowAction(style: .Default, title: "Delete", handler: {
       _, indexPathForAction in
       let confirmBox = UIAlertController(title: "Delete this memo?",
@@ -66,7 +65,42 @@ class ViewController: UITableViewController {
       confirmBox.addAction(cancelDelete)
       self.presentViewController(confirmBox, animated: true, completion: nil)
     })
-    return [deleteAction]
+
+    let editAction = UITableViewRowAction(style: .Default, title: "Edit", handler: {
+      _, indexPathForAction in
+      let editBox = UIAlertController(title: "Edit this memo?",
+                                    message: self.memos[indexPathForAction.row].valueForKey("title") as? String,
+                             preferredStyle: .Alert)
+      let confirmEdit = UIAlertAction(title: "Update", style: .Default, handler: {
+        _ in
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let managedContext = appDelegate.managedObjectContext
+        self.memos[indexPathForAction.row].setValue(editBox.textFields?[0].text, forKey: "title")
+        do {
+          try managedContext.save()
+          self.tableView.reloadData()
+        } catch {
+          let updateError = error as NSError
+          print(updateError)
+        }
+        self.dismissViewControllerAnimated(true, completion: nil)
+        tableView.setEditing(false, animated: false)
+      })
+      let cancelEdit = UIAlertAction(title: "Cancel", style: .Default, handler: {
+        _ in
+        self.dismissViewControllerAnimated(true, completion: nil)
+        tableView.setEditing(false, animated: false)
+      })
+      editBox.addAction(confirmEdit)
+      editBox.addAction(cancelEdit)
+      editBox.addTextFieldWithConfigurationHandler({
+        textField in
+        textField.text = self.memos[indexPathForAction.row].valueForKey("title") as? String
+      })
+      self.presentViewController(editBox, animated: true, completion: nil)
+    })
+    editAction.backgroundColor = UIColor.blueColor()
+    return [deleteAction, editAction]
   }
 
   // MARK: - UITableViewDataSource
