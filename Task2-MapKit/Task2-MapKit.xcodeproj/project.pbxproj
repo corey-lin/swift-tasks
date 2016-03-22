@@ -12,6 +12,7 @@
 		0491CA501C9FC74400F4205D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0491CA4E1C9FC74400F4205D /* Main.storyboard */; };
 		0491CA521C9FC74400F4205D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0491CA511C9FC74400F4205D /* Assets.xcassets */; };
 		0491CA551C9FC74400F4205D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0491CA531C9FC74400F4205D /* LaunchScreen.storyboard */; };
+		0491CA5D1CA1131300F4205D /* MyAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0491CA5C1CA1131300F4205D /* MyAnnotation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		0491CA511C9FC74400F4205D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0491CA541C9FC74400F4205D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0491CA561C9FC74400F4205D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0491CA5C1CA1131300F4205D /* MyAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyAnnotation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +58,7 @@
 			children = (
 				0491CA4A1C9FC74400F4205D /* AppDelegate.swift */,
 				0491CA4C1C9FC74400F4205D /* ViewController.swift */,
+				0491CA5C1CA1131300F4205D /* MyAnnotation.swift */,
 				0491CA4E1C9FC74400F4205D /* Main.storyboard */,
 				0491CA511C9FC74400F4205D /* Assets.xcassets */,
 				0491CA531C9FC74400F4205D /* LaunchScreen.storyboard */,
@@ -137,6 +140,7 @@
 			files = (
 				0491CA4D1C9FC74400F4205D /* ViewController.swift in Sources */,
 				0491CA4B1C9FC74400F4205D /* AppDelegate.swift in Sources */,
+				0491CA5D1CA1131300F4205D /* MyAnnotation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
