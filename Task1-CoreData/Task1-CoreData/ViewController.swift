@@ -54,12 +54,10 @@ class ViewController: UITableViewController {
         } catch {
           print("Error: delete a memo")
         }
-        self.dismissViewControllerAnimated(true, completion: nil)
       })
       let cancelDelete = UIAlertAction(title: "No", style: .Default, handler: {
         _ in
         tableView.setEditing(false, animated: false)
-        self.dismissViewControllerAnimated(true, completion: nil)
       })
       confirmBox.addAction(confirmDelete)
       confirmBox.addAction(cancelDelete)
@@ -83,12 +81,10 @@ class ViewController: UITableViewController {
           let updateError = error as NSError
           print(updateError)
         }
-        self.dismissViewControllerAnimated(true, completion: nil)
         tableView.setEditing(false, animated: false)
       })
       let cancelEdit = UIAlertAction(title: "Cancel", style: .Default, handler: {
         _ in
-        self.dismissViewControllerAnimated(true, completion: nil)
         tableView.setEditing(false, animated: false)
       })
       editBox.addAction(confirmEdit)
@@ -139,16 +135,14 @@ class ViewController: UITableViewController {
         self.tableView.reloadData()
       }
     })
-    let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: { _ in
-      self.dismissViewControllerAnimated(true, completion: nil)
-    })
+    let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: nil)
     enterPanel.addAction(saveAction)
     enterPanel.addAction(cancelAction)
     enterPanel.addTextFieldWithConfigurationHandler({
       textField in
       textField.placeholder = "Type something"
     })
-    self.presentViewController(enterPanel, animated: true, completion:nil)
+    self.presentViewController(enterPanel, animated: true, completion: nil)
   }
 
   private func saveItem(memo: String) {
