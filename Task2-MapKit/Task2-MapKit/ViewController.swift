@@ -13,6 +13,8 @@ class ViewController: UIViewController, UISearchBarDelegate, MKMapViewDelegate, 
   @IBOutlet weak var mapView: MKMapView!
   @IBOutlet weak var showOptionBtn: UIBarButtonItem!
   var contentController: UITableViewController!
+  var mapType: UISegmentedControl!
+  var showPOI: UISwitch!
 
   @IBAction func showMapOptions(sender: AnyObject) {
     contentController.tableView.dataSource = self
@@ -20,7 +22,7 @@ class ViewController: UIViewController, UISearchBarDelegate, MKMapViewDelegate, 
     let popPC = contentController.popoverPresentationController!
     popPC.barButtonItem = showOptionBtn
     popPC.delegate = self
-    self.presentViewController(contentController, animated: true, completion: nil)
+    presentViewController(contentController, animated: true, completion: nil)
   }
   @IBAction func showSearchBar(sender: AnyObject) {
     let searchController = UISearchController(searchResultsController: nil)
@@ -29,12 +31,20 @@ class ViewController: UIViewController, UISearchBarDelegate, MKMapViewDelegate, 
     presentViewController(searchController, animated: true, completion: nil)
   }
 
+  override func loadView() {
+    super.loadView()
+    mapType = UISegmentedControl(items:["Standard", "Satellite", "Hybrid"])
+    showPOI = UISwitch()
+    contentController = UITableViewController()
+  }
+
   override func viewDidLoad() {
     super.viewDidLoad()
     // Do any additional setup after loading the view, typically from a nib.
     mapView.delegate = self
-    contentController = UITableViewController()
     contentController.tableView.dataSource = self
+    mapType.selectedSegmentIndex = 0
+    showPOI.on = mapView.showsPointsOfInterest
   }
 
   override func didReceiveMemoryWarning() {
@@ -103,11 +113,13 @@ class ViewController: UIViewController, UISearchBarDelegate, MKMapViewDelegate, 
       if cell == nil {
         cell = UITableViewCell(style: .Default, reuseIdentifier: "cellMapType")
       }
-      let mapType = UISegmentedControl(items:["Standard", "Satellite", "Hybrid"])
       mapType.center = cell.center
       cell.addSubview(mapType)
     } else {
-      let showPOI = UISwitch()
+      cell = tableView.dequeueReusableCellWithIdentifier("cellShowPOI")
+      if cell == nil {
+        cell = UITableViewCell(style: .Default, reuseIdentifier: "cellShowPOI")
+      }
       cell.textLabel?.text = "Show Point Of Interest"
       cell.accessoryView = showPOI
     }
@@ -126,9 +138,24 @@ class ViewController: UIViewController, UISearchBarDelegate, MKMapViewDelegate, 
     return navController
   }
 
-// MARK: -
-  func done() {
+  func popoverPresentationControllerDidDismissPopover(popoverPresentationController: UIPopoverPresentationController) {
+    done()
+  }
 
+// MARK: - Dismiss Popover
+  func done() {
+    presentedViewController?.dismissViewControllerAnimated(true, completion: nil)
+    mapView.showsPointsOfInterest = showPOI.on
+    switch mapType.selectedSegmentIndex {
+    case 0:
+      mapView.mapType = .Standard
+    case 1:
+      mapView.mapType = .Hybrid
+    case 2:
+      mapView.mapType = .Satellite
+    default:
+      mapView.mapType = .Standard
+    }
   }
 }
 
