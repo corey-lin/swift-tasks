@@ -30,6 +30,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Map" id="XLk-Vd-G3B">
+                        <barButtonItem key="leftBarButtonItem" systemItem="add" id="fjg-k6-59G">
+                            <connections>
+                                <action selector="showMapOptions:" destination="BYZ-38-t0r" id="Kph-PZ-7p5"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="search" id="Jig-qd-76Y">
                             <connections>
                                 <action selector="showSearchBar:" destination="BYZ-38-t0r" id="luz-OL-bdS"/>
@@ -38,6 +43,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="mapView" destination="Sb9-cc-hlG" id="P33-C0-hJc"/>
+                        <outlet property="showOptionBtn" destination="fjg-k6-59G" id="LQJ-cL-q3g"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
