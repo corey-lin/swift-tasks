@@ -15,6 +15,7 @@ class ViewController: UIViewController, UISearchBarDelegate, MKMapViewDelegate, 
   var contentController: UITableViewController!
   var mapType: UISegmentedControl!
   var showPOI: UISwitch!
+  var mapItemData: MKMapItem!
 
   @IBAction func showMapOptions(sender: AnyObject) {
     contentController.tableView.dataSource = self
@@ -72,15 +73,18 @@ class ViewController: UIViewController, UISearchBarDelegate, MKMapViewDelegate, 
         return
       }
 
-      let pinPoint = CLLocationCoordinate2D(latitude: response.boundingRegion.center.latitude,
-                                           longitude: response.boundingRegion.center.longitude)
+      let pinPoint = CLLocationCoordinate2D(latitude: response.mapItems.last!.placemark.coordinate.latitude,
+                                           longitude: response.mapItems.last!.placemark.coordinate.longitude)
       let myAnnotation = MyAnnotation(coordinate: pinPoint, title: searchBar.text, subtitle: nil)
       let region = MKCoordinateRegionMakeWithDistance(pinPoint, 3000, 3000)
       self.mapView.centerCoordinate = pinPoint
       self.mapView.setRegion(region, animated: true)
       self.mapView.addAnnotation(myAnnotation)
+      self.mapItemData = response.mapItems.last
     })
   }
+
+// MARK: - MKMapViewDelegate
 
   func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
     if annotation is MyAnnotation {
@@ -89,12 +93,17 @@ class ViewController: UIViewController, UISearchBarDelegate, MKMapViewDelegate, 
         myAnnotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: "MyPinView")
         let image = UIImage(named: "logo")
         myAnnotationView?.image = UIImage(CGImage: (image?.CGImage)!, scale: 5, orientation: .Up)
+        myAnnotationView?.rightCalloutAccessoryView = UIButton(type: .InfoLight)
         myAnnotationView?.canShowCallout = true
       }
       return myAnnotationView
     } else {
       return nil
     }
+  }
+
+  func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+    performSegueWithIdentifier("pinDetails", sender: nil)
   }
 
 // MARK: - UITableViewDataSource
@@ -143,6 +152,7 @@ class ViewController: UIViewController, UISearchBarDelegate, MKMapViewDelegate, 
   }
 
 // MARK: - Dismiss Popover
+
   func done() {
     presentedViewController?.dismissViewControllerAnimated(true, completion: nil)
     mapView.showsPointsOfInterest = showPOI.on
@@ -156,6 +166,13 @@ class ViewController: UIViewController, UISearchBarDelegate, MKMapViewDelegate, 
     default:
       mapView.mapType = .Standard
     }
+  }
+
+// MARK: -
+
+  override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    let pinDetailsVC = segue.destinationViewController as! PinDetailsViewController
+    pinDetailsVC.mapItemData = mapItemData
   }
 }
 

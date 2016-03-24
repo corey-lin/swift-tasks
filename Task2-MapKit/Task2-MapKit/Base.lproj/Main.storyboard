@@ -44,11 +44,45 @@
                     <connections>
                         <outlet property="mapView" destination="Sb9-cc-hlG" id="P33-C0-hJc"/>
                         <outlet property="showOptionBtn" destination="fjg-k6-59G" id="LQJ-cL-q3g"/>
+                        <segue destination="Iw5-hA-goh" kind="show" identifier="pinDetails" id="fUC-Gb-b8G"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="990" y="-298"/>
+        </scene>
+        <!--Pin Details View Controller-->
+        <scene sceneID="vx1-i3-JBM">
+            <objects>
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="Iw5-hA-goh" customClass="PinDetailsViewController" customModule="Task2_MapKit" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="nH7-bW-F6n"/>
+                        <viewControllerLayoutGuide type="bottom" id="l5I-Nr-Rgr"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="4rc-Lw-F6d">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Md6-fC-ZMn">
+                                <rect key="frame" x="0.0" y="64" width="600" height="536"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="l5I-Nr-Rgr" firstAttribute="top" secondItem="Md6-fC-ZMn" secondAttribute="bottom" id="3Yw-QF-rRv"/>
+                            <constraint firstItem="Md6-fC-ZMn" firstAttribute="leading" secondItem="4rc-Lw-F6d" secondAttribute="leading" id="MEe-nC-xCY"/>
+                            <constraint firstItem="Md6-fC-ZMn" firstAttribute="top" secondItem="nH7-bW-F6n" secondAttribute="bottom" id="Ocy-hc-aac"/>
+                            <constraint firstAttribute="trailing" secondItem="Md6-fC-ZMn" secondAttribute="trailing" id="yLR-Xe-dDk"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="Md6-fC-ZMn" id="PTv-fQ-QJe"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2KP-7q-1dc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1645" y="-303"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="HfM-h8-g7w">
