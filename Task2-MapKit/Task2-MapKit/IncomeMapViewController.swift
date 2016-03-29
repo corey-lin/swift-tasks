@@ -116,6 +116,22 @@ class IncomeMapViewController: UIViewController, UIPopoverPresentationController
   }
 
   func mapSearch() {
-
+    guard selectedItemIndex != -1 else {
+      return
+    }
+    let url = NSURL(string: "http://api.worldbank.org/country?per_page=100&region=\(regionCodes[selectedItemIndex])&format=json")
+    let task = NSURLSession.sharedSession().dataTaskWithURL(url!) {
+      (data: NSData?, response: NSURLResponse?, error: NSError?) in
+      guard data != nil else {
+        return
+      }
+      do{
+        let json = try NSJSONSerialization.JSONObjectWithData(data!, options: []) as! NSArray
+        print(json)
+      } catch {
+        print("Error: JSON")
+      }
+    }
+    task.resume()
   }
 }
