@@ -126,12 +126,27 @@ class IncomeMapViewController: UIViewController, UIPopoverPresentationController
         return
       }
       do{
-        let json = try NSJSONSerialization.JSONObjectWithData(data!, options: []) as! NSArray
-        print(json)
+        let json = try NSJSONSerialization.JSONObjectWithData(data!, options: []) as! [AnyObject]
+        let data = json[1] as! [AnyObject]
+        dispatch_async(dispatch_get_main_queue()) {
+          self.handleBankData(data)
+        }
       } catch {
         print("Error: JSON")
       }
     }
     task.resume()
+  }
+
+  func handleBankData(data: [AnyObject]) {
+    guard data.count > 0 else {
+      return
+    }
+    print(data)
+    let cityInfo = data[0] as! Dictionary<String, AnyObject>
+    let location = CLLocationCoordinate2D(latitude: Double(cityInfo["latitude"] as! String)!, longitude: Double(cityInfo["longitude"] as! String)!)
+    let span = MKCoordinateSpan(latitudeDelta: 20, longitudeDelta: 20)
+    let region = MKCoordinateRegionMake(location, span)
+    mapView.setRegion(region, animated: true)
   }
 }
