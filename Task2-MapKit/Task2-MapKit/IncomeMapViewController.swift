@@ -8,8 +8,7 @@
 import UIKit
 import MapKit
 
-class IncomeMapViewController: UIViewController, UIPopoverPresentationControllerDelegate, UITableViewDataSource,
-  UITableViewDelegate {
+class IncomeMapViewController: UIViewController {
   @IBOutlet weak var mapView: MKMapView!
   @IBOutlet weak var areaListBtn: UIBarButtonItem!
   var contentController: UITableViewController!
@@ -25,7 +24,7 @@ class IncomeMapViewController: UIViewController, UIPopoverPresentationController
     "European Union",
     "North America",
     "North Africa",
-    "South Asia"
+    "South Asia II"
   ]
 
   let regionCodes = [
@@ -48,6 +47,7 @@ class IncomeMapViewController: UIViewController, UIPopoverPresentationController
     contentController = UITableViewController()
     contentController.tableView.dataSource = self
     contentController.tableView.delegate = self
+    mapView.delegate = self
     selectedItemIndex = -1
   }
 
@@ -63,55 +63,13 @@ class IncomeMapViewController: UIViewController, UIPopoverPresentationController
     presentViewController(contentController, animated: true, completion: nil)
   }
 
-// MARK: - UITableViewDataSource
-
-  func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return regionNames.count
-  }
-
-  func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-    var cell = tableView.dequeueReusableCellWithIdentifier("regionCell")
-    if cell == nil {
-      cell = UITableViewCell(style: .Default, reuseIdentifier: "regionCell")
-    }
-    cell?.textLabel?.text = regionNames[indexPath.row]
-    cell?.accessoryType = .None
-    return cell!
-  }
-
-// MARK: - UITableViewDelegate
-
-  func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-    let cell = tableView.cellForRowAtIndexPath(indexPath)
-    cell?.accessoryType = .Checkmark
-    selectedItemIndex = indexPath.row
-  }
-
-  func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
-    let cell = tableView.cellForRowAtIndexPath(indexPath)
-    cell?.accessoryType = .None
-  }
-
-// MARK: - UIPopoverPresentationControllerDelegate
-
-  func popoverPresentationControllerDidDismissPopover(popoverPresentationController: UIPopoverPresentationController) {
-    done()
-  }
-
-  func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle {
-    return .FullScreen
-  }
-
-  func presentationController(controller: UIPresentationController, viewControllerForAdaptivePresentationStyle style: UIModalPresentationStyle) -> UIViewController? {
-    let navController = UINavigationController(rootViewController: controller.presentedViewController)
-    controller.presentedViewController.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: Selector("done"))
-    return navController
-  }
-
 // MARK: -
 
   func done() {
     dismissViewControllerAnimated(true, completion: nil)
+    if mapView.annotations.count != 0 {
+      mapView.removeAnnotations(mapView.annotations)
+    }
     mapSearch()
   }
 
@@ -142,11 +100,96 @@ class IncomeMapViewController: UIViewController, UIPopoverPresentationController
     guard data.count > 0 else {
       return
     }
-    print(data)
     let cityInfo = data[0] as! Dictionary<String, AnyObject>
     let location = CLLocationCoordinate2D(latitude: Double(cityInfo["latitude"] as! String)!, longitude: Double(cityInfo["longitude"] as! String)!)
     let span = MKCoordinateSpan(latitudeDelta: 20, longitudeDelta: 20)
     let region = MKCoordinateRegionMake(location, span)
     mapView.setRegion(region, animated: true)
+
+    for item in data {
+      let pinAnnotation = SalaryLevelAnnotation()
+      let incomeLevel = item["incomeLevel"] as! Dictionary<String, AnyObject>
+      if let level = incomeLevel["value"] {
+        let levelString = level as! String
+        if levelString == "High income: OECD" || levelString == "High income: nonOECD" {
+          pinAnnotation.imageName = "High income"
+        }else{
+          pinAnnotation.imageName = (incomeLevel["value"] as! String)
+        }
+      }
+      pinAnnotation.coordinate = CLLocationCoordinate2D(latitude: Double(item["latitude"] as! String)!, longitude: Double(item["longitude"] as! String)!)
+      pinAnnotation.title = item["name"] as? String
+      pinAnnotation.subtitle = item["capitalCity"] as? String
+      mapView.addAnnotation(pinAnnotation)
+    }
+  }
+}
+
+extension IncomeMapViewController: UITableViewDataSource, UITableViewDelegate {
+
+// MARK: - UITableViewDataSource
+
+  func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    return regionNames.count
+  }
+
+  func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    var cell = tableView.dequeueReusableCellWithIdentifier("regionCell")
+    if cell == nil {
+      cell = UITableViewCell(style: .Default, reuseIdentifier: "regionCell")
+    }
+    cell?.textLabel?.text = regionNames[indexPath.row]
+    cell?.accessoryType = .None
+    return cell!
+  }
+
+// MARK: - UITableViewDelegate
+
+  func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    let cell = tableView.cellForRowAtIndexPath(indexPath)
+    cell?.accessoryType = .Checkmark
+    selectedItemIndex = indexPath.row
+  }
+
+  func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
+    let cell = tableView.cellForRowAtIndexPath(indexPath)
+    cell?.accessoryType = .None
+  }
+}
+
+extension IncomeMapViewController: UIPopoverPresentationControllerDelegate {
+
+// MARK: - UIPopoverPresentationControllerDelegate
+
+  func popoverPresentationControllerDidDismissPopover(popoverPresentationController: UIPopoverPresentationController) {
+    done()
+  }
+
+  func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle {
+    return .FullScreen
+  }
+
+  func presentationController(controller: UIPresentationController, viewControllerForAdaptivePresentationStyle style: UIModalPresentationStyle) -> UIViewController? {
+    let navController = UINavigationController(rootViewController: controller.presentedViewController)
+    controller.presentedViewController.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: Selector("done"))
+    return navController
+  }
+}
+
+extension IncomeMapViewController: MKMapViewDelegate {
+  func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
+    if annotation is SalaryLevelAnnotation {
+      let levelAnnotation = annotation as! SalaryLevelAnnotation
+      var annotationView = mapView.dequeueReusableAnnotationViewWithIdentifier("level")
+      if annotationView == nil {
+        annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: "level")
+      }
+      annotationView?.annotation = annotation
+      annotationView?.image = UIImage(named: levelAnnotation.imageName)
+      annotationView?.canShowCallout = true
+      return annotationView
+    } else {
+      return nil
+    }
   }
 }
