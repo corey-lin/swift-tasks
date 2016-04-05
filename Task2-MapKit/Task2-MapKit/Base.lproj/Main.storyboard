@@ -197,6 +197,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="mapView" destination="S4O-EI-vbK" id="dFO-bO-Kit"/>
+                        <outlet property="searchBarItem" destination="djs-b9-pFW" id="LWd-xU-i0R"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="y2R-8b-8NE" userLabel="First Responder" sceneMemberID="firstResponder"/>
