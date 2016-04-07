@@ -17,6 +17,7 @@
 		0491CA611CA4EA9500F4205D /* IncomeMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0491CA601CA4EA9500F4205D /* IncomeMapViewController.swift */; };
 		04E394221CAE181200B3CB60 /* SalaryLevelAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E394211CAE181200B3CB60 /* SalaryLevelAnnotation.swift */; };
 		04E394241CAF982E00B3CB60 /* RegionMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E394231CAF982E00B3CB60 /* RegionMapViewController.swift */; };
+		04E394261CB626A500B3CB60 /* RegionListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E394251CB626A500B3CB60 /* RegionListViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		0491CA601CA4EA9500F4205D /* IncomeMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IncomeMapViewController.swift; sourceTree = "<group>"; };
 		04E394211CAE181200B3CB60 /* SalaryLevelAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SalaryLevelAnnotation.swift; sourceTree = "<group>"; };
 		04E394231CAF982E00B3CB60 /* RegionMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegionMapViewController.swift; sourceTree = "<group>"; };
+		04E394251CB626A500B3CB60 /* RegionListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegionListViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +73,7 @@
 				0491CA5E1CA3A4B100F4205D /* PinDetailsViewController.swift */,
 				0491CA601CA4EA9500F4205D /* IncomeMapViewController.swift */,
 				04E394231CAF982E00B3CB60 /* RegionMapViewController.swift */,
+				04E394251CB626A500B3CB60 /* RegionListViewController.swift */,
 				0491CA4E1C9FC74400F4205D /* Main.storyboard */,
 				0491CA511C9FC74400F4205D /* Assets.xcassets */,
 				0491CA531C9FC74400F4205D /* LaunchScreen.storyboard */,
@@ -150,6 +153,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04E394261CB626A500B3CB60 /* RegionListViewController.swift in Sources */,
 				0491CA4D1C9FC74400F4205D /* ViewController.swift in Sources */,
 				04E394221CAE181200B3CB60 /* SalaryLevelAnnotation.swift in Sources */,
 				0491CA5F1CA3A4B100F4205D /* PinDetailsViewController.swift in Sources */,
