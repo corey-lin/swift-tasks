@@ -8,8 +8,14 @@
 
 import UIKit
 
+protocol RegionsProtocol {
+  func loadOverlayForRegionWithLatitude(latitude: Double, andLongitude longitude: Double)
+}
+
 class RegionListViewController: UIViewController {
   @IBOutlet weak var regionList: UITableView!
+  var delegate: RegionsProtocol?
+  var selectFinished: (() -> (Void))?
   var regions = ["Verkhoyansk (Russia)","Fraser, Colo (United States)","Hell (Norway)","Barrow (Alaska)","Oymyakon (Russia)"]
   var latitudes = [67.550592,39.944987,63.445171,71.290556,63.464138]
   var longitudes = [133.399340,-105.817232,10.905217,-156.788611,142.773727]
@@ -33,5 +39,10 @@ extension RegionListViewController: UITableViewDataSource, UITableViewDelegate {
     }
     cell?.textLabel?.text = regions[indexPath.row]
     return cell!
+  }
+
+  func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    delegate?.loadOverlayForRegionWithLatitude(latitudes[indexPath.row], andLongitude: longitudes[indexPath.row])
+    selectFinished?()
   }
 }
