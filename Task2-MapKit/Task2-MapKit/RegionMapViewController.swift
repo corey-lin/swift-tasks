@@ -13,7 +13,7 @@ class RegionMapViewController: UIViewController {
   @IBOutlet weak var mapView: MKMapView!
 
   override func viewDidLoad() {
-
+    mapView.delegate = self
   }
 
   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -29,6 +29,24 @@ class RegionMapViewController: UIViewController {
 
 extension RegionMapViewController: RegionsProtocol {
   func loadOverlayForRegionWithLatitude(latitude: Double, andLongitude longitude: Double) {
-    print("\(latitude) \(longitude)")
+    mapView.removeOverlays(mapView.overlays)
+    let coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+    let circle = MKCircle(centerCoordinate: coordinate, radius: 200000)
+    mapView.setRegion(MKCoordinateRegionMakeWithDistance(coordinate, 800000, 800000), animated: true)
+    mapView.addOverlay(circle)
+  }
+}
+
+extension RegionMapViewController: MKMapViewDelegate {
+  func mapView(mapView: MKMapView, rendererForOverlay overlay: MKOverlay) -> MKOverlayRenderer {
+    if let circle = overlay as? MKCircle {
+      let circleRenderer = MKCircleRenderer(circle: circle)
+      circleRenderer.fillColor = UIColor.redColor().colorWithAlphaComponent(0.1)
+      circleRenderer.strokeColor = UIColor.redColor()
+      circleRenderer.lineWidth = 1
+      return circleRenderer
+    } else {
+      return MKOverlayRenderer(overlay: overlay);
+    }
   }
 }
