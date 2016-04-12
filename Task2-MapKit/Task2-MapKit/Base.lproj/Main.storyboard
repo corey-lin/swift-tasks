@@ -97,11 +97,51 @@
                         <segue destination="vva-S6-Sjn" kind="relationship" relationship="viewControllers" id="w6W-G4-GIv"/>
                         <segue destination="dgx-fS-bzA" kind="relationship" relationship="viewControllers" id="gkr-ba-e6t"/>
                         <segue destination="CiX-0Z-MPH" kind="relationship" relationship="viewControllers" id="zeh-Nd-V5x"/>
+                        <segue destination="K5I-ME-gxO" kind="relationship" relationship="viewControllers" id="I58-VO-RlB"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iSN-7W-4yO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-474" y="-345"/>
+            <point key="canvasLocation" x="-1716" y="667"/>
+        </scene>
+        <!--ETA-->
+        <scene sceneID="dpo-Fr-O3j">
+            <objects>
+                <viewController id="K5I-ME-gxO" customClass="ETAMapViewController" customModule="Task2_MapKit" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="L90-2v-yOO"/>
+                        <viewControllerLayoutGuide type="bottom" id="BnI-ha-ot5"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="SRd-1r-sQc">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="wz7-t1-zsT">
+                                <rect key="frame" x="0.0" y="20" width="600" height="506"/>
+                            </mapView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Xp-nd-AJz">
+                                <rect key="frame" x="0.0" y="526" width="600" height="30"/>
+                                <state key="normal" title="Next"/>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="wz7-t1-zsT" secondAttribute="trailing" id="AHK-Z7-Jvl"/>
+                            <constraint firstAttribute="trailing" secondItem="0Xp-nd-AJz" secondAttribute="trailing" id="JZv-bQ-omq"/>
+                            <constraint firstItem="wz7-t1-zsT" firstAttribute="top" secondItem="L90-2v-yOO" secondAttribute="bottom" id="X5h-ck-NPF"/>
+                            <constraint firstItem="wz7-t1-zsT" firstAttribute="leading" secondItem="SRd-1r-sQc" secondAttribute="leading" id="jgt-mL-8ZB"/>
+                            <constraint firstItem="0Xp-nd-AJz" firstAttribute="leading" secondItem="SRd-1r-sQc" secondAttribute="leading" id="kTj-K6-jJc"/>
+                            <constraint firstItem="0Xp-nd-AJz" firstAttribute="top" secondItem="wz7-t1-zsT" secondAttribute="bottom" id="p4D-SS-6Ri"/>
+                            <constraint firstItem="BnI-ha-ot5" firstAttribute="top" secondItem="0Xp-nd-AJz" secondAttribute="bottom" id="snE-2Q-fAN"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="ETA" image="Icon1" id="SbL-gf-hxE"/>
+                    <toolbarItems/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ace-IG-Vnk" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1592" y="1640"/>
         </scene>
         <!--Place Search Map-->
         <scene sceneID="HfM-h8-g7w">
