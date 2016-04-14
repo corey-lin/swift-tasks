@@ -122,6 +122,9 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Xp-nd-AJz">
                                 <rect key="frame" x="0.0" y="526" width="600" height="30"/>
                                 <state key="normal" title="Next"/>
+                                <connections>
+                                    <action selector="nextPlace:" destination="K5I-ME-gxO" eventType="touchUpInside" id="Flz-Sb-hyY"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -138,6 +141,9 @@
                     <tabBarItem key="tabBarItem" title="ETA" image="Icon1" id="SbL-gf-hxE"/>
                     <toolbarItems/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="mapView" destination="wz7-t1-zsT" id="awc-3M-91e"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ace-IG-Vnk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

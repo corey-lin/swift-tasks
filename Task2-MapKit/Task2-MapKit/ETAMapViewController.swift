@@ -7,7 +7,19 @@
 //
 
 import UIKit
+import MapKit
 
 class ETAMapViewController: UIViewController {
+  @IBOutlet weak var mapView: MKMapView!
 
+  var locationManager: CLLocationManager!
+
+  override func viewDidLoad() {
+    locationManager = CLLocationManager()
+    locationManager.requestWhenInUseAuthorization()
+    mapView.showsUserLocation = true
+  }
+
+  @IBAction func nextPlace(sender: AnyObject) {
+  }
 }
