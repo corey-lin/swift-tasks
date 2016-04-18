@@ -10,7 +10,7 @@ import UIKit
 import MapKit
 
 class ETAMapViewController: UIViewController {
-  @IBOutlet weak var mapView: MKMapView!
+  @IBOutlet var mapView: MKMapView!
 
   let coordinates = [
     [37.4848474,-122.1505746],

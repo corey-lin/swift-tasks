@@ -9,7 +9,7 @@
 import MapKit
 
 class PinDetailsViewController: UIViewController, UITableViewDataSource {
-  @IBOutlet weak var tableView: UITableView!
+  @IBOutlet var tableView: UITableView!
 
   var mapItemData: MKMapItem!
 

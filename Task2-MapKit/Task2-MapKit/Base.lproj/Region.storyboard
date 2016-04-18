@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="CiX-0Z-MPH">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+    </dependencies>
+    <scenes>
+        <!--Coolest Region Map-->
+        <scene sceneID="NFk-Pe-L0Z">
+            <objects>
+                <viewController id="JXD-W7-EAr" customClass="RegionMapViewController" customModule="Task2_MapKit" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="a0Z-sI-IQK"/>
+                        <viewControllerLayoutGuide type="bottom" id="4PN-FR-bRd"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="C20-BS-BDS">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="S4O-EI-vbK">
+                                <rect key="frame" x="0.0" y="64" width="600" height="487"/>
+                            </mapView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="S4O-EI-vbK" firstAttribute="top" secondItem="a0Z-sI-IQK" secondAttribute="bottom" id="Bcp-g4-Fp1"/>
+                            <constraint firstItem="4PN-FR-bRd" firstAttribute="top" secondItem="S4O-EI-vbK" secondAttribute="bottom" id="blN-0D-QWX"/>
+                            <constraint firstAttribute="trailing" secondItem="S4O-EI-vbK" secondAttribute="trailing" id="cK6-v4-AMu"/>
+                            <constraint firstItem="S4O-EI-vbK" firstAttribute="leading" secondItem="C20-BS-BDS" secondAttribute="leading" id="s5U-OA-dZv"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Coolest Region Map" id="qs3-VC-3Sp">
+                        <barButtonItem key="rightBarButtonItem" systemItem="search" id="djs-b9-pFW">
+                            <connections>
+                                <segue destination="SNa-46-a4N" kind="presentation" id="ree-xh-gWd"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="mapView" destination="S4O-EI-vbK" id="dFO-bO-Kit"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="y2R-8b-8NE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="507" y="1126"/>
+        </scene>
+        <!--Region List View Controller-->
+        <scene sceneID="c3d-o4-xon">
+            <objects>
+                <viewController id="SNa-46-a4N" customClass="RegionListViewController" customModule="Task2_MapKit" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="4HW-Ua-OU7"/>
+                        <viewControllerLayoutGuide type="bottom" id="ooM-SN-r1O"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="qoS-LD-r6s">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="nJz-rd-lXp">
+                                <rect key="frame" x="0.0" y="64" width="600" height="536"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="woE-mI-Dch">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="64"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="64" id="wjG-Kf-0YK"/>
+                                </constraints>
+                                <items>
+                                    <navigationItem title="Coolest Region List" id="GlT-Lt-gIa"/>
+                                </items>
+                            </navigationBar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="ooM-SN-r1O" firstAttribute="top" secondItem="nJz-rd-lXp" secondAttribute="bottom" id="EfW-0A-gUg"/>
+                            <constraint firstItem="woE-mI-Dch" firstAttribute="top" secondItem="qoS-LD-r6s" secondAttribute="top" id="MpE-h4-YtZ"/>
+                            <constraint firstAttribute="trailing" secondItem="woE-mI-Dch" secondAttribute="trailing" id="Vio-lO-FoI"/>
+                            <constraint firstItem="nJz-rd-lXp" firstAttribute="top" secondItem="woE-mI-Dch" secondAttribute="bottom" id="gcj-VP-SPg"/>
+                            <constraint firstAttribute="trailing" secondItem="nJz-rd-lXp" secondAttribute="trailing" id="hWc-Hx-OY6"/>
+                            <constraint firstItem="woE-mI-Dch" firstAttribute="leading" secondItem="qoS-LD-r6s" secondAttribute="leading" id="jTO-Ka-vMp"/>
+                            <constraint firstItem="nJz-rd-lXp" firstAttribute="leading" secondItem="qoS-LD-r6s" secondAttribute="leading" id="tKO-6h-WMK"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="regionList" destination="nJz-rd-lXp" id="tN9-am-ecS"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="N3K-D4-50a" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1163" y="1126"/>
+        </scene>
+        <!--Region-->
+        <scene sceneID="r5u-S0-UlL">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="CiX-0Z-MPH" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Region" image="Icon1" id="QcL-at-88n"/>
+                    <toolbarItems/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="d0j-jb-caX">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="JXD-W7-EAr" kind="relationship" relationship="rootViewController" id="dKV-lo-zoU"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Gvi-df-gGS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-174" y="1126"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="Icon1" width="30" height="30"/>
+    </resources>
+</document>

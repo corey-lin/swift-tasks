@@ -9,8 +9,8 @@ import UIKit
 import MapKit
 
 class IncomeMapViewController: UIViewController {
-  @IBOutlet weak var mapView: MKMapView!
-  @IBOutlet weak var areaListBtn: UIBarButtonItem!
+  @IBOutlet var mapView: MKMapView!
+  @IBOutlet var areaListBtn: UIBarButtonItem!
   var contentController: UITableViewController!
   var selectedItemIndex: Int!
   let regionNames = [

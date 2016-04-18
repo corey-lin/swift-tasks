@@ -10,8 +10,8 @@ import UIKit
 import MapKit
 
 class ViewController: UIViewController, UISearchBarDelegate, MKMapViewDelegate, UITableViewDataSource, UIPopoverPresentationControllerDelegate {
-  @IBOutlet weak var mapView: MKMapView!
-  @IBOutlet weak var showOptionBtn: UIBarButtonItem!
+  @IBOutlet var mapView: MKMapView!
+  @IBOutlet var showOptionBtn: UIBarButtonItem!
   var contentController: UITableViewController!
   var mapType: UISegmentedControl!
   var showPOI: UISwitch!

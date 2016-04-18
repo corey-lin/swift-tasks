@@ -16,6 +16,10 @@
 		0491CA5F1CA3A4B100F4205D /* PinDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0491CA5E1CA3A4B100F4205D /* PinDetailsViewController.swift */; };
 		0491CA611CA4EA9500F4205D /* IncomeMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0491CA601CA4EA9500F4205D /* IncomeMapViewController.swift */; };
 		04D544FE1CBD9AB0002357AB /* ETAMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D544FD1CBD9AB0002357AB /* ETAMapViewController.swift */; };
+		04E34F971CC4A4DD004407FA /* Region.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04E34F951CC4A4DD004407FA /* Region.storyboard */; };
+		04E34F9A1CC4A527004407FA /* Search.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04E34F981CC4A527004407FA /* Search.storyboard */; };
+		04E34F9D1CC4A550004407FA /* Income.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04E34F9B1CC4A550004407FA /* Income.storyboard */; };
+		04E34FA01CC4A582004407FA /* ETA.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04E34F9E1CC4A582004407FA /* ETA.storyboard */; };
 		04E394221CAE181200B3CB60 /* SalaryLevelAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E394211CAE181200B3CB60 /* SalaryLevelAnnotation.swift */; };
 		04E394241CAF982E00B3CB60 /* RegionMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E394231CAF982E00B3CB60 /* RegionMapViewController.swift */; };
 		04E394261CB626A500B3CB60 /* RegionListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E394251CB626A500B3CB60 /* RegionListViewController.swift */; };
@@ -33,6 +37,10 @@
 		0491CA5E1CA3A4B100F4205D /* PinDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PinDetailsViewController.swift; sourceTree = "<group>"; };
 		0491CA601CA4EA9500F4205D /* IncomeMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IncomeMapViewController.swift; sourceTree = "<group>"; };
 		04D544FD1CBD9AB0002357AB /* ETAMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ETAMapViewController.swift; sourceTree = "<group>"; };
+		04E34F961CC4A4DD004407FA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Region.storyboard; sourceTree = "<group>"; };
+		04E34F991CC4A527004407FA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Search.storyboard; sourceTree = "<group>"; };
+		04E34F9C1CC4A550004407FA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Income.storyboard; sourceTree = "<group>"; };
+		04E34F9F1CC4A582004407FA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/ETA.storyboard; sourceTree = "<group>"; };
 		04E394211CAE181200B3CB60 /* SalaryLevelAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SalaryLevelAnnotation.swift; sourceTree = "<group>"; };
 		04E394231CAF982E00B3CB60 /* RegionMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegionMapViewController.swift; sourceTree = "<group>"; };
 		04E394251CB626A500B3CB60 /* RegionListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegionListViewController.swift; sourceTree = "<group>"; };
@@ -78,6 +86,10 @@
 				04D544FD1CBD9AB0002357AB /* ETAMapViewController.swift */,
 				04E394251CB626A500B3CB60 /* RegionListViewController.swift */,
 				0491CA4E1C9FC74400F4205D /* Main.storyboard */,
+				04E34F9E1CC4A582004407FA /* ETA.storyboard */,
+				04E34F9B1CC4A550004407FA /* Income.storyboard */,
+				04E34F981CC4A527004407FA /* Search.storyboard */,
+				04E34F951CC4A4DD004407FA /* Region.storyboard */,
 				0491CA511C9FC74400F4205D /* Assets.xcassets */,
 				0491CA531C9FC74400F4205D /* LaunchScreen.storyboard */,
 				0491CA561C9FC74400F4205D /* Info.plist */,
@@ -143,9 +155,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04E34FA01CC4A582004407FA /* ETA.storyboard in Resources */,
+				04E34F971CC4A4DD004407FA /* Region.storyboard in Resources */,
 				0491CA551C9FC74400F4205D /* LaunchScreen.storyboard in Resources */,
 				0491CA521C9FC74400F4205D /* Assets.xcassets in Resources */,
 				0491CA501C9FC74400F4205D /* Main.storyboard in Resources */,
+				04E34F9A1CC4A527004407FA /* Search.storyboard in Resources */,
+				04E34F9D1CC4A550004407FA /* Income.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -185,6 +201,38 @@
 				0491CA541C9FC74400F4205D /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		04E34F951CC4A4DD004407FA /* Region.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				04E34F961CC4A4DD004407FA /* Base */,
+			);
+			name = Region.storyboard;
+			sourceTree = "<group>";
+		};
+		04E34F981CC4A527004407FA /* Search.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				04E34F991CC4A527004407FA /* Base */,
+			);
+			name = Search.storyboard;
+			sourceTree = "<group>";
+		};
+		04E34F9B1CC4A550004407FA /* Income.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				04E34F9C1CC4A550004407FA /* Base */,
+			);
+			name = Income.storyboard;
+			sourceTree = "<group>";
+		};
+		04E34F9E1CC4A582004407FA /* ETA.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				04E34F9F1CC4A582004407FA /* Base */,
+			);
+			name = ETA.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

@@ -13,7 +13,7 @@ protocol RegionsProtocol {
 }
 
 class RegionListViewController: UIViewController {
-  @IBOutlet weak var regionList: UITableView!
+  @IBOutlet var regionList: UITableView!
   var delegate: RegionsProtocol?
   var selectFinished: (() -> (Void))?
   var regions = ["Verkhoyansk (Russia)","Fraser, Colo (United States)","Hell (Norway)","Barrow (Alaska)","Oymyakon (Russia)"]

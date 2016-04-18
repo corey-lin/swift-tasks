@@ -10,7 +10,7 @@ import MapKit
 
 class RegionMapViewController: UIViewController {
 
-  @IBOutlet weak var mapView: MKMapView!
+  @IBOutlet var mapView: MKMapView!
 
   override func viewDidLoad() {
     mapView.delegate = self

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="dgx-fS-bzA">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+    </dependencies>
+    <scenes>
+        <!--Income Level-->
+        <scene sceneID="Vep-yH-vfv">
+            <objects>
+                <viewController id="xvu-zm-odJ" customClass="IncomeMapViewController" customModule="Task2_MapKit" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="nKk-vM-3Ws"/>
+                        <viewControllerLayoutGuide type="bottom" id="ewH-Wq-YUu"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Dae-QO-6yz">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Hwu-En-nuq">
+                                <rect key="frame" x="0.0" y="64" width="600" height="487"/>
+                            </mapView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="ewH-Wq-YUu" firstAttribute="top" secondItem="Hwu-En-nuq" secondAttribute="bottom" id="C32-pD-dzM"/>
+                            <constraint firstItem="Hwu-En-nuq" firstAttribute="leading" secondItem="Dae-QO-6yz" secondAttribute="leading" id="r6d-IR-lCb"/>
+                            <constraint firstAttribute="trailing" secondItem="Hwu-En-nuq" secondAttribute="trailing" id="sli-jx-vff"/>
+                            <constraint firstItem="Hwu-En-nuq" firstAttribute="top" secondItem="nKk-vM-3Ws" secondAttribute="bottom" id="tao-xR-FTK"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Income Level" id="LE3-bf-G9e">
+                        <barButtonItem key="leftBarButtonItem" systemItem="add" id="n1C-nE-AHF">
+                            <connections>
+                                <action selector="showAreaList:" destination="xvu-zm-odJ" id="nK4-2E-Z7m"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="areaListBtn" destination="n1C-nE-AHF" id="4me-D2-HJr"/>
+                        <outlet property="mapView" destination="Hwu-En-nuq" id="TJB-pj-djK"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KjK-iJ-qwH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1057" y="344"/>
+        </scene>
+        <!--Income-->
+        <scene sceneID="OT4-Z2-uOd">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="dgx-fS-bzA" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Income" image="Icon1" id="Tsb-t5-Ztv"/>
+                    <toolbarItems/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Fqe-kg-Ukt">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="xvu-zm-odJ" kind="relationship" relationship="rootViewController" id="eCL-dY-SQs"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Txg-rP-fwC" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="245" y="435"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="Icon1" width="30" height="30"/>
+    </resources>
+</document>
