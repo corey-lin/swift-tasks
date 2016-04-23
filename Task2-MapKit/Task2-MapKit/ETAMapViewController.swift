@@ -38,9 +38,44 @@ class ETAMapViewController: UIViewController {
     let longitude = coordinate[1]
     let locationCoordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
 
-    let annotation = CompanyAnnotation(coordinate: locationCoordinate)
+    var annotation = CompanyAnnotation(coordinate: locationCoordinate)
     annotation.title = names[currentDestinationIndex]
     annotation.image = images[currentDestinationIndex]
+
+    let request = MKDirectionsRequest()
+    let sourceItem = MKMapItem(placemark: MKPlacemark(coordinate: mapView.userLocation.coordinate, addressDictionary: nil))
+    request.source = sourceItem
+    let destinationItem = MKMapItem(placemark: MKPlacemark(coordinate: locationCoordinate, addressDictionary: nil))
+    request.destination = destinationItem
+    request.requestsAlternateRoutes = false
+    request.transportType = .Transit
+    mapView.setCenterCoordinate(locationCoordinate, animated: true)
+    let directions = MKDirections(request: request)
+    directions.calculateETAWithCompletionHandler() {
+      (response: MKETAResponse?, error: NSError?) in
+      if let error = error {
+        print("Error while requesting ETA:\(error.localizedDescription)")
+        annotation.eta = error.localizedDescription
+      } else {
+        let etaTime = Int((response?.expectedTravelTime)! / 60)
+        annotation.eta = "\(etaTime)"
+        print(annotation.eta)
+      }
+    }
+
+    var isExist = false
+    for a in mapView.annotations {
+      if a.coordinate.latitude == locationCoordinate.latitude &&
+        a.coordinate.longitude == locationCoordinate.longitude {
+        isExist = true
+        annotation = a as! CompanyAnnotation
+      }
+    }
+    if !isExist {
+      mapView.addAnnotation(annotation)
+    }
+    mapView.selectAnnotation(annotation, animated: true)
+    currentDestinationIndex++
   }
 }
 
