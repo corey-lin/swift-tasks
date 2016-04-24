@@ -80,8 +80,35 @@ class ETAMapViewController: UIViewController {
 }
 
 extension ETAMapViewController: MKMapViewDelegate {
+
   func mapView(mapView: MKMapView, didUpdateUserLocation userLocation: MKUserLocation) {
     let region = MKCoordinateRegion(center: userLocation.coordinate, span: MKCoordinateSpanMake(2, 2))
     mapView.setRegion(region, animated: true)
+  }
+
+  func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
+    guard annotation is CompanyAnnotation else {
+      return nil
+    }
+    var annotationView = mapView.dequeueReusableAnnotationViewWithIdentifier("Pin")
+    if annotationView == nil {
+      annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "Pin")
+      annotationView?.canShowCallout = true
+    } else {
+      annotationView?.annotation = annotation
+    }
+    let companyAnnotation = annotation as! CompanyAnnotation
+    annotationView?.detailCalloutAccessoryView = UIImageView(image: companyAnnotation.image)
+    let leftAccessory = UILabel(frame: CGRectMake(0, 0, 50, 30))
+    leftAccessory.text = companyAnnotation.eta
+    print(companyAnnotation.eta)
+    leftAccessory.font = UIFont(name: "Verdana", size: 10)
+    annotationView?.leftCalloutAccessoryView = leftAccessory
+    let image = UIImage(named: "Bus")
+    let button = UIButton(type: .Custom)
+    button.frame = CGRectMake(0, 0, 30, 30)
+    button.setImage(image, forState: .Normal)
+    annotationView?.rightCalloutAccessoryView = button
+    return annotationView
   }
 }
