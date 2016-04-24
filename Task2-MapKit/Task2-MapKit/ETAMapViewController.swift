@@ -58,24 +58,23 @@ class ETAMapViewController: UIViewController {
         annotation.eta = error.localizedDescription
       } else {
         let etaTime = Int((response?.expectedTravelTime)! / 60)
-        annotation.eta = "\(etaTime)"
-        print(annotation.eta)
+        annotation.eta = "\(etaTime) min"
       }
-    }
 
-    var isExist = false
-    for a in mapView.annotations {
-      if a.coordinate.latitude == locationCoordinate.latitude &&
-        a.coordinate.longitude == locationCoordinate.longitude {
-        isExist = true
-        annotation = a as! CompanyAnnotation
+      var isExist = false
+      for a in self.mapView.annotations {
+        if a.coordinate.latitude == locationCoordinate.latitude &&
+          a.coordinate.longitude == locationCoordinate.longitude {
+          isExist = true
+          annotation = a as! CompanyAnnotation
+        }
       }
+      if !isExist {
+        self.mapView.addAnnotation(annotation)
+      }
+      self.mapView.selectAnnotation(annotation, animated: true)
+      self.currentDestinationIndex++
     }
-    if !isExist {
-      mapView.addAnnotation(annotation)
-    }
-    mapView.selectAnnotation(annotation, animated: true)
-    currentDestinationIndex++
   }
 }
 
@@ -101,7 +100,6 @@ extension ETAMapViewController: MKMapViewDelegate {
     annotationView?.detailCalloutAccessoryView = UIImageView(image: companyAnnotation.image)
     let leftAccessory = UILabel(frame: CGRectMake(0, 0, 50, 30))
     leftAccessory.text = companyAnnotation.eta
-    print(companyAnnotation.eta)
     leftAccessory.font = UIFont(name: "Verdana", size: 10)
     annotationView?.leftCalloutAccessoryView = leftAccessory
     let image = UIImage(named: "Bus")
@@ -110,5 +108,12 @@ extension ETAMapViewController: MKMapViewDelegate {
     button.setImage(image, forState: .Normal)
     annotationView?.rightCalloutAccessoryView = button
     return annotationView
+  }
+
+  func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+    let placemark = MKPlacemark(coordinate: view.annotation!.coordinate, addressDictionary: nil)
+    let mapItem = MKMapItem(placemark: placemark)
+    let launchOptions = [MKLaunchOptionsDirectionsModeKey:MKLaunchOptionsDirectionsModeTransit]
+    mapItem.openInMapsWithLaunchOptions(launchOptions)
   }
 }
